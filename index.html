@@ -97,7 +97,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .lb-chev{width:16px;height:16px;flex-shrink:0;stroke:var(--text3);fill:none;stroke-width:2.2;stroke-linecap:round;transition:transform .25s}
 .lb-card.open .lb-chev{transform:rotate(180deg)}
 .lb-panel{max-height:0;overflow:hidden;transition:max-height .32s cubic-bezier(.4,0,.2,1)}
-.lb-card.open .lb-panel{max-height:480px}
+.lb-card.open .lb-panel{max-height:560px}
 .lb-panel-inner{padding:10px 14px 14px;display:flex;flex-direction:column;gap:7px}
 
 /* PLAYER ROW (shared) */
@@ -127,10 +127,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .scoring-card-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--rim)}
 .scoring-card-name{font-size:16px;font-weight:600;color:var(--text)}
 .scoring-card-total{font-family:'Oswald',sans-serif;font-size:24px;font-weight:700;color:var(--orange)}
-.scoring-round-hdrs{display:grid;grid-template-columns:1fr repeat(7,38px);gap:0;padding:7px 14px;border-bottom:1px solid var(--rim);background:var(--s2)}
+.scoring-round-hdrs{display:grid;grid-template-columns:1fr repeat(6,46px) 44px;gap:0;padding:7px 14px;border-bottom:1px solid var(--rim);background:var(--s2)}
 .scoring-round-hdrs span{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);text-align:center}
 .scoring-round-hdrs span:first-child{text-align:left}
-.srow{display:grid;grid-template-columns:1fr repeat(7,38px);gap:0;padding:9px 14px;border-bottom:1px solid var(--rim);align-items:center}
+.srow{display:grid;grid-template-columns:1fr repeat(6,46px) 44px;gap:0;padding:9px 14px;border-bottom:1px solid var(--rim);align-items:center}
 .srow:last-child{border-bottom:none}
 .srow.elim{opacity:.35}
 .srow-info{display:flex;align-items:center;gap:7px;min-width:0}
@@ -139,7 +139,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .scell{text-align:center;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--text3)}
 .scell.pts{color:var(--orange)}
 .scell.tot{color:var(--text);font-size:16px;font-weight:700}
-.srow-totals{display:grid;grid-template-columns:1fr repeat(7,38px);gap:0;padding:9px 14px;background:var(--s2)}
+.srow-totals{display:grid;grid-template-columns:1fr repeat(6,46px) 44px;gap:0;padding:9px 14px;background:var(--s2)}
 .srow-totals span{font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--text2);text-align:center}
 .srow-totals span:first-child{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);font-weight:600;align-self:center}
 .srow-totals .grand{color:var(--orange);font-size:15px}
@@ -287,7 +287,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 // ─── CONSTANTS ────────────────────────────────────────────────
 var STORE      = 'mm_2026';
 var ROUND_KEYS = ['r1a','r1b','r16','r8','r4','champ'];
-var ROUND_LBLS = ['R1 G1','R1 G2','Sw 16','Elite 8','F4','Champ'];
+var ROUND_LBLS = ['Round 1','Round 2','Sweet 16','Elite 8','Final Four','Champion'];
+var ROUND_DISPLAY_KEYS = ['r1','r16','r8','r4','champ']; // merged R1 for display
 var PROXY      = 'https://corsproxy.io/?';
 
 var ABBR = {
@@ -374,6 +375,7 @@ function defDraft() {
     {name:'Chris', picks:[
       p('Darius Acuff Jr.','Arkansas'),
       p('AJ Dybantsa','BYU'),
+      p('Meleek Thomas','Arkansas'),
       p('Milan Momcilovic','Iowa State'),
       p('Darryn Peterson','Kansas'),
       p('Terry Anderson','Cal Baptist'),
@@ -661,7 +663,7 @@ function renderTeams() {
         + '<div class="pr-pts">' + (pts || '—') + '</div>'
         + '</div>';
     }
-    for (var j = picks.length; j < 5; j++) {
+    for (var j = picks.length; j < 6; j++) {
       rows += '<div class="pr" style="opacity:.2"><div class="pr-logofb">—</div><div class="pr-info"><div class="pr-name" style="color:var(--text3)">Empty pick</div></div></div>';
     }
     var strip = '';
@@ -683,23 +685,36 @@ function renderScoring() {
   var wrap = document.getElementById('scoringWrap');
   if (!wrap) return;
   var sorted = draft.slice().sort(function(a,b) { return draftTot(b) - draftTot(a); });
+  // Display rounds: merge r1a+r1b into "Round 1", then R2, Sweet 16, Elite 8, Final Four, Champ
+  var DISP_KEYS  = [['r1a'], ['r1b'], ['r16'], ['r8'], ['r4'], ['champ']];
+  var DISP_LBLS  = ['Rd of 64', 'Rd of 32', 'Sweet 16', 'Elite 8', 'Final Four', 'Champion'];
+
   var html = '';
   for (var i = 0; i < sorted.length; i++) {
     var dr  = sorted[i];
     if (!dr.name) continue;
     var tot = draftTot(dr);
-    var roundTots = [];
-    for (var ri = 0; ri < ROUND_KEYS.length; ri++) {
+
+    // Per-display-round totals for the team
+    var roundTots = DISP_KEYS.map(function(keys) {
       var s = 0;
-      for (var pi = 0; pi < dr.picks.length; pi++) { s += (dr.picks[pi].pts && dr.picks[pi].pts[ROUND_KEYS[ri]]) || 0; }
-      roundTots.push(s);
-    }
+      for (var pi = 0; pi < dr.picks.length; pi++) {
+        for (var ki = 0; ki < keys.length; ki++) {
+          s += (dr.picks[pi].pts && dr.picks[pi].pts[keys[ki]]) || 0;
+        }
+      }
+      return s;
+    });
+
     var playerRows = '';
     for (var pi = 0; pi < dr.picks.length; pi++) {
       var pk = dr.picks[pi];
       var cells = '';
-      for (var ri = 0; ri < ROUND_KEYS.length; ri++) {
-        var v = (pk.pts && pk.pts[ROUND_KEYS[ri]]) || 0;
+      for (var ri = 0; ri < DISP_KEYS.length; ri++) {
+        var v = 0;
+        for (var ki = 0; ki < DISP_KEYS[ri].length; ki++) {
+          v += (pk.pts && pk.pts[DISP_KEYS[ri][ki]]) || 0;
+        }
         cells += '<span class="scell' + (v > 0 ? ' pts' : '') + '">' + (v || '—') + '</span>';
       }
       var ptsTot = pickPts(pk);
@@ -714,7 +729,7 @@ function renderScoring() {
       totCells += '<span' + (roundTots[ri] > 0 ? ' style="color:var(--orange)"' : '') + '>' + (roundTots[ri] || '—') + '</span>';
     }
     var hdrs = '';
-    for (var ri = 0; ri < ROUND_LBLS.length; ri++) { hdrs += '<span>' + ROUND_LBLS[ri] + '</span>'; }
+    for (var ri = 0; ri < DISP_LBLS.length; ri++) { hdrs += '<span>' + DISP_LBLS[ri] + '</span>'; }
     html += '<div class="scoring-card">'
       + '<div class="scoring-card-hdr"><span class="scoring-card-name">' + dr.name + '</span><span class="scoring-card-total">' + (tot || '—') + '</span></div>'
       + '<div class="scoring-round-hdrs"><span>Player</span>' + hdrs + '<span>Total</span></div>'
