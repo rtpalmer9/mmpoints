@@ -15,8 +15,8 @@ body{min-height:100dvh;background:#0d0d0f;color:#f0f0f2;font-family:'Inter',sans
 :root{
   --bg:#0d0d0f;--s1:#161618;--s2:#1c1c1f;--s3:#222226;--s4:#2a2a2f;
   --rim:rgba(255,255,255,0.07);--rim2:rgba(255,255,255,0.13);
-  --orange:#f06a25;--orange2:#ff8c47;--orangef:rgba(240,106,37,0.13);--orangeb:rgba(240,106,37,0.3);
-  --red:#e84855;--redf:rgba(232,72,85,0.12);
+  --orange:#f06a25;--orangef:rgba(240,106,37,0.13);--orangeb:rgba(240,106,37,0.3);
+  --red:#e84855;--redf:rgba(232,72,85,0.10);--redb:rgba(232,72,85,0.22);
   --green:#1db974;
   --gold:#f5c842;--silver:#9ba8b8;--bronze:#c47c3a;
   --text:#f0f0f2;--text2:#7a7a85;--text3:#3a3a42;
@@ -33,7 +33,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .tb-logo em{color:var(--orange);font-style:normal}
 .tb-right{display:flex;align-items:center;gap:10px}
 .live-pill{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;
-  background:var(--redf);border:1px solid rgba(232,72,85,.22);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--red)}
+  background:var(--redf);border:1px solid var(--redb);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--red)}
 .ldot{width:5px;height:5px;border-radius:50%;background:var(--red);animation:blink 1.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .upd{font-size:11px;color:var(--text3)}
@@ -65,7 +65,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* LEADERBOARD */
 .lb-stack{display:flex;flex-direction:column;gap:9px}
 .lb-card{background:var(--s1);border:1px solid var(--rim);border-radius:16px;overflow:hidden;cursor:pointer}
-.lb-card:active{transform:scale(.995)}
 .lb-card.r1{border-color:rgba(245,200,66,.3);background:linear-gradient(140deg,#1a1710 0%,#161618 100%)}
 .lb-card.r2{border-color:rgba(155,168,184,.18)}.lb-card.r3{border-color:rgba(196,124,58,.2)}
 .lb-card.open .lb-head{border-bottom:1px solid var(--rim)}
@@ -86,18 +85,19 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .lb-card.open .lb-panel{max-height:600px}
 .lb-panel-inner{padding:10px 14px 14px;display:flex;flex-direction:column;gap:7px}
 /* PLAYER ROW */
-.pr{display:flex;align-items:center;gap:9px;background:var(--s2);border-radius:10px;padding:9px 10px}
-.pr.elim{opacity:.36}
+.pr{display:flex;align-items:center;gap:9px;background:var(--s2);border-radius:10px;padding:9px 10px;border:1px solid transparent}
+.pr.elim{background:var(--redf);border-color:var(--redb);opacity:.7}
 .pr-logo{width:26px;height:26px;border-radius:6px;object-fit:contain;background:var(--s3);flex-shrink:0}
 .pr-logofb{width:26px;height:26px;border-radius:6px;background:var(--s3);border:1px solid var(--rim2);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--text2);flex-shrink:0}
 .pr-info{flex:1;min-width:0}
 .pr-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pr.elim .pr-name{text-decoration:line-through;color:var(--text2)}
+.pr.elim .pr-name{text-decoration:line-through;color:var(--red)}
 .pr-team{font-size:11px;color:var(--text3);margin-top:1px}
+.pr.elim .pr-team{color:var(--red);opacity:.6}
 .pr-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .pr-dot.alive{background:var(--green)}.pr-dot.out{background:var(--red)}.pr-dot.idle{background:var(--s4)}
 .pr-pts{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--orange);flex-shrink:0;min-width:28px;text-align:right}
-.pr.elim .pr-pts{color:var(--text3)}
+.pr.elim .pr-pts{color:var(--red)}
 /* TEAMS */
 .teams-stack{display:flex;flex-direction:column;gap:12px}
 .team-card{background:var(--s1);border:1px solid var(--rim);border-radius:16px;overflow:hidden}
@@ -115,10 +115,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .s-hdrs span:first-child{text-align:left;font-size:10px}
 .srow{display:grid;grid-template-columns:1fr repeat(6,44px) 40px;gap:0;padding:9px 14px;border-bottom:1px solid var(--rim);align-items:center}
 .srow:last-child{border-bottom:none}
-.srow.elim{opacity:.35}
+.srow.elim{background:var(--redf)}
 .srow-info{display:flex;align-items:center;gap:7px;min-width:0}
 .srow-name{font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.srow.elim .srow-name{text-decoration:line-through;color:var(--text3)}
+.srow.elim .srow-name{text-decoration:line-through;color:var(--red)}
 .scell{text-align:center;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--text3)}
 .scell.has{color:var(--orange)}.scell.tot{color:var(--text);font-size:16px;font-weight:700}
 .s-totrow{display:grid;grid-template-columns:1fr repeat(6,44px) 40px;gap:0;padding:9px 14px;background:var(--s2)}
@@ -131,10 +131,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .day-hdr.today{color:var(--orange)}
 .game-row{background:var(--s1);border:1px solid var(--rim);border-radius:14px;padding:14px;margin-bottom:9px}
 .game-row.live{border-color:rgba(240,106,37,.4);background:rgba(240,106,37,.04)}
-.game-row.done{opacity:.7}
+.game-row.done{opacity:.85}
 .game-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .game-time{font-size:11px;font-weight:600;letter-spacing:1px;color:var(--text2)}
 .game-row.live .game-time{color:var(--orange)}
+.game-row.done .game-time{color:var(--text3)}
 .game-net{font-size:10px;color:var(--text3)}
 .game-teams{display:flex;flex-direction:column;gap:6px}
 .game-team{display:flex;align-items:center;gap:9px}
@@ -142,9 +143,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .game-tlogo{width:24px;height:24px;border-radius:5px;object-fit:contain;background:var(--s3);flex-shrink:0}
 .game-tlogofb{width:24px;height:24px;border-radius:5px;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--text2);flex-shrink:0}
 .game-tname{flex:1;font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.game-team.loser .game-tname{color:var(--text3)}
-.game-score{font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;color:var(--text2);min-width:28px;text-align:right;flex-shrink:0}
-.game-team.winner .game-score{color:var(--green)}.game-team.livescore .game-score{color:var(--orange)}
+.game-team.loser .game-tname{color:var(--text3);text-decoration:line-through}
+.game-score{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;color:var(--text2);min-width:32px;text-align:right;flex-shrink:0}
+.game-team.winner .game-score{color:var(--green)}
+.game-team.winner .game-tname{color:var(--text);font-weight:600}
+.game-team.livescore .game-score{color:var(--orange)}
 .game-div{height:1px;background:var(--rim);margin:2px 0}
 .game-players{margin-top:10px;padding-top:10px;border-top:1px solid var(--rim);display:flex;flex-direction:column;gap:4px}
 .chip{display:flex;align-items:center;gap:7px;font-size:12px}
@@ -186,7 +189,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* BUTTONS */
 .btn{width:100%;padding:15px;border-radius:12px;border:none;cursor:pointer;font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;letter-spacing:1px;transition:all .18s}
 .btn-primary{background:var(--orange);color:#0d0d0f}
-.btn-primary:active{background:var(--orange2);transform:scale(.98)}
+.btn-primary:active{background:#ff8c47;transform:scale(.98)}
 .btn-sec{background:transparent;border:1px solid var(--rim2);color:var(--text2);font-size:14px;letter-spacing:.5px;margin-top:8px}
 .btn-ov{background:var(--s2);border:1px solid var(--orangeb);color:var(--orange);font-size:15px;margin-top:4px}
 /* TOAST */
@@ -237,7 +240,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   </div>
   <div class="view" id="v-edit">
     <div class="inner">
-      <div class="edit-note"><strong>Edit draft picks.</strong> Enter player names exactly as ESPN lists them, along with their school.</div>
+      <div class="edit-note"><strong>Edit draft picks.</strong> Player names must match ESPN exactly.</div>
       <div class="edit-slots" id="editSlots"></div>
       <div style="margin-top:16px">
         <button class="btn btn-primary" onclick="saveDraft()">Save Draft</button>
@@ -245,7 +248,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       </div>
       <div class="ov-section">
         <div class="ov-hdr">Points Override</div>
-        <div class="ov-note">If ESPN auto-update misses a player, enter their points here manually. Select the round, enter points, and check "Out" if their team was eliminated.</div>
+        <div class="ov-note">If ESPN misses a player, enter their points manually. Select round, enter points, check "Out" if eliminated.</div>
         <div class="ov-rounds" id="ovRounds"></div>
         <div id="ovCards"></div>
         <button class="btn btn-ov" onclick="saveOverride()">Save Points Override</button>
@@ -277,66 +280,37 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 </nav>
 <div class="toast" id="toast"></div>
 <script>
-var STORE = 'mm_2026_l2';
-var RK    = ['r1a','r1b','r16','r8','r4','champ'];
-var RL    = ['Rd of 64','Rd of 32','Sweet 16','Elite 8','Final Four','Champion'];
-var PROXIES = ['https://api.cors.lol/?url='];
-var ABBR = {
-  'duke':'150','arizona':'12','michigan':'130','florida':'57',
-  'houston':'248','purdue':'2509','uconn':'41','iowa state':'66',
-  'michigan state':'127','illinois':'356','gonzaga':'2250','virginia':'258',
-  'nebraska':'158','kansas':'2305','arkansas':'8','alabama':'333',
-  'wisconsin':'275','vanderbilt':'238',"st. john's":'2599','texas tech':'2641',
-  'louisville':'97','south florida':'58','north carolina':'153','byu':'252',
-  'tennessee':'2633',"saint mary's":'2608','miami (fla.)':'2390','ucla':'26',
-  'kentucky':'96','ohio state':'194','georgia':'61','villanova':'222',
-  'clemson':'228','tcu':'2628','saint louis':'139','utah state':'328',
-  'iowa':'2294','texas a&m':'245','santa clara':'2608','ucf':'2116',
-  'missouri':'142','vcu':'2670','texas':'251','nc state':'152',
-  'miami (ohio)':'193','smu':'2567','northern iowa':'2272','high point':'2731',
-  'mcneese':'2383','akron':'2006','cal baptist':'2856','troy':'2653',
-  'hawaii':'2229','hofstra':'2234','north dakota state':'2449','penn':'219',
-  'wright state':'2737','kennesaw state':'338','furman':'231','queens':'2797',
-  'tennessee state':'2393','idaho':'70','siena':'2561',
-  'long island university':'2363','umbc':'2378','howard':'47',
-  'lehigh':'2350','prairie view a&m':'2440','campbell':'2102',
-  'akron':'2006'
+var STORE='mm_2026_l2';
+var RK=['r1a','r1b','r16','r8','r4','champ'];
+var RL=['Rd of 64','Rd of 32','Sweet 16','Elite 8','Final Four','Champion'];
+var PROXY='https://api.cors.lol/?url=';
+var ABBR={
+  'duke':'150','arizona':'12','michigan':'130','florida':'57','houston':'248',
+  'purdue':'2509','uconn':'41','iowa state':'66','michigan state':'127','illinois':'356',
+  'gonzaga':'2250','virginia':'258','nebraska':'158','kansas':'2305','arkansas':'8',
+  'alabama':'333','wisconsin':'275','vanderbilt':'238',"st. john's":'2599','texas tech':'2641',
+  'louisville':'97','south florida':'58','north carolina':'153','byu':'252','tennessee':'2633',
+  "saint mary's":'2608','miami (fla.)':'2390','ucla':'26','kentucky':'96','ohio state':'194',
+  'georgia':'61','villanova':'222','clemson':'228','tcu':'2628','saint louis':'139',
+  'utah state':'328','iowa':'2294','texas a&m':'245','santa clara':'2165','ucf':'2116',
+  'missouri':'142','vcu':'2670','texas':'251','nc state':'152','miami (ohio)':'193',
+  'smu':'2567','northern iowa':'2272','high point':'2731','mcneese':'2383','akron':'2006',
+  'cal baptist':'2856','troy':'2653','hawaii':'2229','hofstra':'2234',
+  'north dakota state':'2449','penn':'219','wright state':'2737','kennesaw state':'338',
+  'furman':'231','queens':'2797','tennessee state':'2393','idaho':'70','siena':'2561',
+  'long island university':'2363','umbc':'2378','howard':'47','lehigh':'2350',
+  'prairie view a&m':'2440','campbell':'2102','texas':'251'
 };
-// ── HELPERS ──────────────────────────────────────────────────
-function logoUrl(t) {
-  if (!t) return null;
-  var a = ABBR[t.toLowerCase().trim()];
-  return a ? 'https://a.espncdn.com/i/teamlogos/ncaa/500/' + a + '.png' : null;
-}
-function imgFail(el) {
-  var d = document.createElement('div');
-  d.className = el.getAttribute('data-fc') || 'pr-logofb';
-  d.textContent = el.getAttribute('data-ab') || '?';
-  el.parentNode.replaceChild(d, el);
-}
-function mkLogo(team, fc, px) {
-  var url = logoUrl(team);
-  var ab  = team ? team.slice(0,3).toUpperCase() : '?';
-  fc = fc || 'pr-logofb'; px = px || 26;
-  var cls = (fc === 'game-tlogofb') ? 'game-tlogo' : 'pr-logo';
-  if (url) return '<img class="' + cls + '" src="' + url + '" width="' + px + '" height="' + px + '" alt="" data-fc="' + fc + '" data-ab="' + ab + '" onerror="imgFail(this)" loading="lazy"/>';
-  return '<div class="' + fc + '">' + ab + '</div>';
-}
-function mkSmLogo(team) {
-  var url = logoUrl(team);
-  var ab  = team ? team.slice(0,3).toUpperCase() : '?';
-  if (url) return '<img src="' + url + '" width="24" height="24" style="border-radius:5px;object-fit:contain;background:rgba(255,255,255,.05);flex-shrink:0" data-fc="pr-logofb" data-ab="' + ab + '" onerror="imgFail(this)" loading="lazy" title="' + team + '"/>';
-  return '<div style="width:24px;height:24px;border-radius:5px;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:var(--text2);flex-shrink:0">' + ab + '</div>';
-}
-function normName(n) {
-  if (!n) return '';
-  return n.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/ jr | sr | ii | iii /g,' ').replace(/ +/g,' ').trim();
-}
-function pickPts(p) { var s=0,k=Object.keys(p.pts||{}); for(var i=0;i<k.length;i++) s+=p.pts[k[i]]; return s; }
-function draftTot(dr) { var s=0; for(var i=0;i<dr.picks.length;i++) s+=pickPts(dr.picks[i]); return s; }
+function logoUrl(t){if(!t)return null;var a=ABBR[t.toLowerCase().trim()];return a?'https://a.espncdn.com/i/teamlogos/ncaa/500/'+a+'.png':null;}
+function imgFail(el){var d=document.createElement('div');d.className=el.getAttribute('data-fc')||'pr-logofb';d.textContent=el.getAttribute('data-ab')||'?';el.parentNode.replaceChild(d,el);}
+function mkLogo(team,fc,px){var url=logoUrl(team),ab=team?team.slice(0,3).toUpperCase():'?';fc=fc||'pr-logofb';px=px||26;var cls=(fc==='game-tlogofb')?'game-tlogo':'pr-logo';if(url)return '<img class="'+cls+'" src="'+url+'" width="'+px+'" height="'+px+'" alt="" data-fc="'+fc+'" data-ab="'+ab+'" onerror="imgFail(this)" loading="lazy"/>';return '<div class="'+fc+'">'+ab+'</div>';}
+function mkSmLogo(team){var url=logoUrl(team),ab=team?team.slice(0,3).toUpperCase():'?';if(url)return '<img src="'+url+'" width="24" height="24" style="border-radius:5px;object-fit:contain;background:rgba(255,255,255,.05);flex-shrink:0" data-fc="pr-logofb" data-ab="'+ab+'" onerror="imgFail(this)" loading="lazy" title="'+team+'"/>';return '<div style="width:24px;height:24px;border-radius:5px;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:var(--text2);flex-shrink:0">'+ab+'</div>';}
+function normName(n){if(!n)return '';return n.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/ jr | sr | ii | iii /g,' ').replace(/ +/g,' ').trim();}
+function pickPts(p){var s=0,k=Object.keys(p.pts||{});for(var i=0;i<k.length;i++)s+=p.pts[k[i]];return s;}
+function draftTot(dr){var s=0;for(var i=0;i<dr.picks.length;i++)s+=pickPts(dr.picks[i]);return s;}
 // ── DRAFT DATA ───────────────────────────────────────────────
-function defDraft() {
-  function p(pl,tm) { return {player:pl,team:tm,pts:{},eliminated:false}; }
+function defDraft(){
+  function p(pl,tm){return{player:pl,team:tm,pts:{},eliminated:false};}
   return [
     {name:'Trevor', picks:[p('Cameron Boozer','Duke'),p('Graham Ike','Gonzaga'),p('Alex Condon','Florida'),p('Christian Anderson','Texas Tech'),p('Cruz Davis','Hofstra'),p('Xaivian Lee','Florida')]},
     {name:'Pete',   picks:[p('Brayden Burries','Arizona'),p('Jaden Bradley','Arizona'),p('Emanuel Sharp','Houston'),p('Milos Uzan','Houston'),p('Motiejus Krivas','Arizona'),p('Amani Lyles','Akron')]},
@@ -346,91 +320,88 @@ function defDraft() {
     {name:'Palmer', picks:[p('Thomas Haugh','Florida'),p('Isaiah Evans','Duke'),p('Joshua Jefferson','Iowa State'),p('Koa Peat','Arizona'),p('Tamin Lipsey','Iowa State'),p('Trey Campbell','Northern Iowa')]}
   ];
 }
-function loadDraft() {
-  var base = defDraft();
-  try {
-    var sv = JSON.parse(localStorage.getItem(STORE));
-    if (!sv || !Array.isArray(sv)) return base;
-    for (var i=0;i<base.length;i++) {
-      var st = null;
-      for (var j=0;j<sv.length;j++) { if(sv[j].name===base[i].name){st=sv[j];break;} }
-      if (!st) continue;
-      for (var j=0;j<base[i].picks.length;j++) {
-        var bp=base[i].picks[j], sp=null;
-        if(st.picks) for(var k=0;k<st.picks.length;k++) { if(st.picks[k].player&&st.picks[k].player.toLowerCase()===bp.player.toLowerCase()){sp=st.picks[k];break;} }
+function loadDraft(){
+  var base=defDraft();
+  try{
+    var sv=JSON.parse(localStorage.getItem(STORE));
+    if(!sv||!Array.isArray(sv))return base;
+    for(var i=0;i<base.length;i++){
+      var st=null;
+      for(var j=0;j<sv.length;j++){if(sv[j].name===base[i].name){st=sv[j];break;}}
+      if(!st)continue;
+      for(var j=0;j<base[i].picks.length;j++){
+        var bp=base[i].picks[j],sp=null;
+        if(st.picks)for(var k=0;k<st.picks.length;k++){if(st.picks[k].player&&st.picks[k].player.toLowerCase()===bp.player.toLowerCase()){sp=st.picks[k];break;}}
         if(sp){bp.pts=sp.pts||{};bp.eliminated=sp.eliminated||false;}
       }
     }
-  } catch(e){}
+  }catch(e){}
   return base;
 }
-function saveLocal() { try{localStorage.setItem(STORE,JSON.stringify(draft));}catch(e){} }
-// ── STATE ────────────────────────────────────────────────────
-var draft = loadDraft(), openCard = null, bracketData = null, _d = [], ovRound = 'r1a';
-// ── ESPN FETCH ───────────────────────────────────────────────
-async function espnFetch(url) {
-  for (var i=0;i<PROXIES.length;i++) {
-    try {
-      var ctrl=new AbortController(), timer=setTimeout(function(){ctrl.abort();},8000);
-      var proxyUrl=PROXIES[i]+encodeURIComponent(url);
-      var r=await fetch(proxyUrl,{signal:ctrl.signal});
-      clearTimeout(timer);
-      if(r.ok) return r.json();
-    } catch(e){}
-  }
-  return null;
+function saveLocal(){try{localStorage.setItem(STORE,JSON.stringify(draft));}catch(e){}}
+var draft=loadDraft(),openCard=null,bracketData=null,_d=[],ovRound='r1a';
+// ── ESPN ─────────────────────────────────────────────────────
+async function espnFetch(url){
+  try{
+    var ctrl=new AbortController(),timer=setTimeout(function(){ctrl.abort();},9000);
+    var r=await fetch(PROXY+encodeURIComponent(url),{signal:ctrl.signal});
+    clearTimeout(timer);
+    return r.ok?r.json():null;
+  }catch(e){return null;}
 }
-function roundKey(g) {
+function roundKey(g){
   var t=((g.notes||[]).map(function(n){return n.headline||'';}).join(' ')+' '+(g.name||'')).toLowerCase();
-  if(t.indexOf('first round')!==-1||t.indexOf('round of 64')!==-1) return 'r1a';
-  if(t.indexOf('second round')!==-1||t.indexOf('round of 32')!==-1) return 'r1b';
-  if(t.indexOf('sweet')!==-1) return 'r16';
-  if(t.indexOf('elite')!==-1) return 'r8';
-  if(t.indexOf('final four')!==-1||t.indexOf('semifinal')!==-1) return 'r4';
-  if(t.indexOf('champion')!==-1) return 'champ';
+  if(t.indexOf('first round')!==-1||t.indexOf('round of 64')!==-1)return 'r1a';
+  if(t.indexOf('second round')!==-1||t.indexOf('round of 32')!==-1)return 'r1b';
+  if(t.indexOf('sweet')!==-1)return 'r16';
+  if(t.indexOf('elite')!==-1)return 'r8';
+  if(t.indexOf('final four')!==-1||t.indexOf('semifinal')!==-1)return 'r4';
+  if(t.indexOf('champion')!==-1)return 'champ';
   return 'r1a';
 }
 // ── REFRESH ──────────────────────────────────────────────────
-async function refresh() {
-  document.getElementById('updTxt').textContent = 'Updating\u2026';
+async function refresh(){
+  document.getElementById('updTxt').textContent='Updating\u2026';
   renderAll();
-  try {
-    var sb = await espnFetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=100&limit=200');
-    if (!sb) { document.getElementById('updTxt').textContent = 'Retrying\u2026'; return; }
-    bracketData = sb.events || [];
-    var completed = bracketData.filter(function(e){return e.status&&e.status.type&&e.status.type.completed;});
-    var elim = {};
-    for (var gi=0;gi<completed.length;gi++) {
+  try{
+    var sb=await espnFetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=100&limit=200');
+    if(!sb){document.getElementById('updTxt').textContent='Retrying\u2026';return;}
+    bracketData=sb.events||[];
+    var completed=bracketData.filter(function(e){return e.status&&e.status.type&&e.status.type.completed;});
+    // Build elimination map from scoreboard
+    var elim={};
+    for(var gi=0;gi<completed.length;gi++){
       var comps=completed[gi].competitions||[];
-      for (var ci=0;ci<comps.length;ci++) {
+      for(var ci=0;ci<comps.length;ci++){
         var tms=comps[ci].competitors||[];
-        if(tms.length<2) continue;
+        if(tms.length<2)continue;
         var scores=tms.map(function(t){return+(t.score||0);});
         var mx=Math.max.apply(null,scores);
-        for(var ti=0;ti<tms.length;ti++) {
-          if(+(tms[ti].score||0)<mx) {
+        for(var ti=0;ti<tms.length;ti++){
+          if(+(tms[ti].score||0)<mx){
             var tn=(tms[ti].team&&tms[ti].team.displayName)?tms[ti].team.displayName.toLowerCase():'';
-            elim[tn]=true;
+            if(tn)elim[tn]=true;
           }
         }
       }
     }
+    // Fetch box scores
     var pts={};
-    for(var bi=0;bi<completed.length;bi+=6) {
-      await Promise.all(completed.slice(bi,bi+6).map(async function(g) {
+    for(var bi=0;bi<completed.length;bi+=4){
+      await Promise.all(completed.slice(bi,bi+4).map(async function(g){
         var rk=roundKey(g);
         var box=await espnFetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/summary?event='+g.id);
-        if(!box) return;
+        if(!box)return;
         var players=(box.players)||(box.boxscore&&box.boxscore.players)||[];
-        for(var pi=0;pi<players.length;pi++) {
+        for(var pi=0;pi<players.length;pi++){
           var stats=players[pi].statistics||[];
-          for(var si=0;si<stats.length;si++) {
-            var cat=stats[si], ptsIdx=(cat.labels||[]).indexOf('PTS'), aths=cat.athletes||[];
-            for(var ai=0;ai<aths.length;ai++) {
+          for(var si=0;si<stats.length;si++){
+            var cat=stats[si],ptsIdx=(cat.labels||[]).indexOf('PTS'),aths=cat.athletes||[];
+            for(var ai=0;ai<aths.length;ai++){
               var nm=(aths[ai].athlete&&aths[ai].athlete.displayName)?normName(aths[ai].athlete.displayName):'';
-              if(!nm) continue;
+              if(!nm)continue;
               var v=ptsIdx>=0?+(aths[ai].stats&&aths[ai].stats[ptsIdx]||0):0;
-              if(!pts[nm]) pts[nm]={};
+              if(!pts[nm])pts[nm]={};
               pts[nm][rk]=(pts[nm][rk]||0)+v;
             }
           }
@@ -438,40 +409,35 @@ async function refresh() {
       }));
     }
     var changed=false;
-    for(var di=0;di<draft.length;di++) {
-      for(var pi=0;pi<draft[di].picks.length;pi++) {
+    for(var di=0;di<draft.length;di++){
+      for(var pi=0;pi<draft[di].picks.length;pi++){
         var pk=draft[di].picks[pi];
-        if(!pk.player) continue;
+        if(!pk.player)continue;
         var key=normName(pk.player);
-        var np=pts[key]||{}, ne=elim[pk.team.toLowerCase()]===true;
-        // Only update pts from ESPN if player has no manual override for this round
-        // (manual override: pts set but no ESPN match — we check if key exists in pts)
+        var np=pts[key]||{};
+        var ne=elim[pk.team.toLowerCase()]===true;
         var espnHasData=Object.keys(np).length>0;
-        if(espnHasData && (JSON.stringify(pk.pts)!==JSON.stringify(np)||pk.eliminated!==ne)) {
-          pk.pts=np; pk.eliminated=ne; changed=true;
-        } else if(!espnHasData && pk.eliminated!==ne) {
-          pk.eliminated=ne; changed=true;
-        }
+        if(espnHasData&&JSON.stringify(pk.pts)!==JSON.stringify(np)){pk.pts=np;changed=true;}
+        if(pk.eliminated!==ne){pk.eliminated=ne;changed=true;}
       }
     }
     if(changed){saveLocal();renderAll();}
     document.getElementById('updTxt').textContent=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
     renderGames();
-  } catch(e) {
+  }catch(e){
     document.getElementById('updTxt').textContent='Retrying\u2026';
     console.warn('Refresh:',e);
   }
 }
-// ── RENDER ALL ───────────────────────────────────────────────
-function renderAll() { renderHero(); renderBoard(); renderTeams(); renderScoring(); renderGames(); }
+function renderAll(){renderHero();renderBoard();renderTeams();renderScoring();renderGames();}
 // ── HERO ─────────────────────────────────────────────────────
-function renderHero() {
-  var el=document.getElementById('heroSection'); if(!el) return;
+function renderHero(){
+  var el=document.getElementById('heroSection');if(!el)return;
   var sorted=draft.slice().sort(function(a,b){return draftTot(b)-draftTot(a);});
-  var leader=sorted[0]; if(!leader||!leader.name){el.innerHTML='';return;}
-  var tot=draftTot(leader), alive=0, total=0;
-  for(var i=0;i<draft.length;i++) for(var j=0;j<draft[i].picks.length;j++) if(draft[i].picks[j].player){total++;if(!draft[i].picks[j].eliminated)alive++;}
-  var seen={}, strip='';
+  var leader=sorted[0];if(!leader||!leader.name){el.innerHTML='';return;}
+  var tot=draftTot(leader),alive=0,total=0;
+  for(var i=0;i<draft.length;i++)for(var j=0;j<draft[i].picks.length;j++)if(draft[i].picks[j].player){total++;if(!draft[i].picks[j].eliminated)alive++;}
+  var seen={},strip='';
   for(var i=0;i<leader.picks.length;i++){var t=leader.picks[i].team;if(t&&!seen[t]){seen[t]=true;strip+=mkSmLogo(t);}}
   el.innerHTML='<div class="hero"><div class="hero-label">\uD83C\uDFC6 Current Leader</div>'
     +'<div class="hero-name">'+leader.name+'</div>'
@@ -481,19 +447,18 @@ function renderHero() {
     +'<div class="hero-alive-txt"><strong>'+alive+'</strong> of '+total+' players still alive</div></div></div>';
 }
 // ── BOARD ────────────────────────────────────────────────────
-function renderBoard() {
-  var el=document.getElementById('lbStack'); if(!el) return;
+function renderBoard(){
+  var el=document.getElementById('lbStack');if(!el)return;
   var sorted=draft.slice().sort(function(a,b){return draftTot(b)-draftTot(a);});
-  if(!sorted.some(function(d){return d.name;})){el.innerHTML='<div class="empty"><div class="ico">\uD83C\uDFC0</div><h3>No Draft Yet</h3><p>Tap Edit to enter picks.</p></div>';return;}
   var html='';
   for(var i=0;i<sorted.length;i++){
-    var dr=sorted[i]; if(!dr.name) continue;
-    var rank=i+1, tot=draftTot(dr), rc=rank===1?'r1':rank===2?'r2':rank===3?'r3':'rn';
-    var alive=0; for(var j=0;j<dr.picks.length;j++) if(dr.picks[j].player&&!dr.picks[j].eliminated) alive++;
-    var isOpen=openCard===dr.name, rows='';
+    var dr=sorted[i];if(!dr.name)continue;
+    var rank=i+1,tot=draftTot(dr),rc=rank===1?'r1':rank===2?'r2':rank===3?'r3':'rn';
+    var alive=0;for(var j=0;j<dr.picks.length;j++)if(dr.picks[j].player&&!dr.picks[j].eliminated)alive++;
+    var isOpen=openCard===dr.name,rows='';
     for(var j=0;j<dr.picks.length;j++){
-      var pk=dr.picks[j]; if(!pk.player) continue;
-      var pts=pickPts(pk), dot=pk.eliminated?'out':pts>0?'alive':'idle';
+      var pk=dr.picks[j];if(!pk.player)continue;
+      var pts=pickPts(pk),dot=pk.eliminated?'out':pts>0?'alive':'idle';
       rows+='<div class="pr'+(pk.eliminated?' elim':'')+'">'+mkLogo(pk.team)
         +'<div class="pr-info"><div class="pr-name">'+pk.player+'</div><div class="pr-team">'+(pk.team||'&mdash;')+'</div></div>'
         +'<div class="pr-dot '+dot+'"></div><div class="pr-pts">'+(pts||'&mdash;')+'</div></div>';
@@ -501,33 +466,32 @@ function renderBoard() {
     var sn=dr.name.replace(/'/g,"\\'");
     html+='<div class="lb-card '+rc+(isOpen?' open':'')+'" style="animation-delay:'+(i*.05)+'s" onclick="toggleCard(\''+sn+'\')">'
       +'<div class="lb-head"><div class="lb-rank">'+rank+'</div>'
-      +'<div class="lb-info"><div class="lb-name">'+dr.name+'</div><div class="lb-sub">'+alive+' alive &middot; tap for players</div></div>'
+      +'<div class="lb-info"><div class="lb-name">'+dr.name+'</div><div class="lb-sub">'+alive+' alive &middot; tap to expand</div></div>'
       +'<div class="lb-score"><div class="lb-pts">'+tot+'</div><div class="lb-ptslbl">PTS</div></div>'
       +'<svg class="lb-chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>'
       +'<div class="lb-panel"><div class="lb-panel-inner">'+rows+'</div></div></div>';
   }
-  el.innerHTML=html;
+  el.innerHTML=html||'<div class="empty"><div class="ico">\uD83C\uDFC0</div><h3>No Draft Yet</h3><p>Tap Edit to enter picks.</p></div>';
 }
 window.toggleCard=function(name){
-  openCard=openCard===name?null:name; renderBoard();
-  if(openCard) setTimeout(function(){var e=document.querySelector('.lb-card.open');if(e)e.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
+  openCard=openCard===name?null:name;renderBoard();
+  if(openCard)setTimeout(function(){var e=document.querySelector('.lb-card.open');if(e)e.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
 };
 // ── TEAMS ────────────────────────────────────────────────────
-function renderTeams() {
-  var el=document.getElementById('teamsStack'); if(!el) return;
-  var sorted=draft.slice().sort(function(a,b){return draftTot(b)-draftTot(a);}), html='';
+function renderTeams(){
+  var el=document.getElementById('teamsStack');if(!el)return;
+  var sorted=draft.slice().sort(function(a,b){return draftTot(b)-draftTot(a);}),html='';
   for(var i=0;i<sorted.length;i++){
-    var dr=sorted[i], tot=draftTot(dr), picks=dr.picks.filter(function(p){return p.player;}), rows='', strip='';
+    var dr=sorted[i],tot=draftTot(dr),picks=dr.picks.filter(function(p){return p.player;}),rows='',strip='';
     for(var j=0;j<picks.length;j++){
-      var pk=picks[j], pts=pickPts(pk), dot=pk.eliminated?'out':pts>0?'alive':'idle';
+      var pk=picks[j],pts=pickPts(pk),dot=pk.eliminated?'out':pts>0?'alive':'idle';
       rows+='<div class="pr'+(pk.eliminated?' elim':'')+'">'+mkLogo(pk.team)
         +'<div class="pr-info"><div class="pr-name">'+pk.player+'</div><div class="pr-team">'+(pk.team||'&mdash;')+'</div></div>'
         +'<div class="pr-dot '+dot+'"></div><div class="pr-pts">'+(pts||'&mdash;')+'</div></div>';
       strip+=mkSmLogo(pk.team);
     }
-    for(var j=picks.length;j<6;j++) rows+='<div class="pr" style="opacity:.2"><div class="pr-logofb">&mdash;</div><div class="pr-info"><div class="pr-name" style="color:var(--text3)">Empty pick</div></div></div>';
-    html+='<div class="team-card" style="animation-delay:'+(i*.05)+'s">'
-      +'<div class="team-hdr"><div style="flex:1;min-width:0"><div class="team-owner">'+(dr.name||'Team '+(i+1))+'</div>'
+    for(var j=picks.length;j<6;j++)rows+='<div class="pr" style="opacity:.2"><div class="pr-logofb">&mdash;</div><div class="pr-info"><div class="pr-name" style="color:var(--text3)">Empty pick</div></div></div>';
+    html+='<div class="team-card"><div class="team-hdr"><div style="flex:1;min-width:0"><div class="team-owner">'+(dr.name||'Team '+(i+1))+'</div>'
       +'<div style="display:flex;gap:5px;margin-top:8px;flex-wrap:wrap">'+strip+'</div></div>'
       +'<div class="team-total">'+(tot||'&mdash;')+'</div></div>'
       +'<div class="team-players">'+rows+'</div></div>';
@@ -535,39 +499,33 @@ function renderTeams() {
   el.innerHTML=html;
 }
 // ── SCORING ──────────────────────────────────────────────────
-function renderScoring() {
-  var wrap=document.getElementById('scoringWrap'); if(!wrap) return;
-  // Display keys: r1a+r1b merged=Rd of 64, r1b=Rd of 32, etc.
+function renderScoring(){
+  var wrap=document.getElementById('scoringWrap');if(!wrap)return;
   var DK=[['r1a'],['r1b'],['r16'],['r8'],['r4'],['champ']];
   var DL=['Rd of 64','Rd of 32','Sweet 16','Elite 8','Final Four','Champion'];
-  var sorted=draft.slice().sort(function(a,b){return draftTot(b)-draftTot(a);}), html='';
+  var sorted=draft.slice().sort(function(a,b){return draftTot(b)-draftTot(a);}),html='';
   for(var i=0;i<sorted.length;i++){
-    var dr=sorted[i]; if(!dr.name) continue;
+    var dr=sorted[i];if(!dr.name)continue;
     var tot=draftTot(dr);
     var rtots=DK.map(function(keys){
       var s=0;
-      for(var pi=0;pi<dr.picks.length;pi++) for(var ki=0;ki<keys.length;ki++) s+=(dr.picks[pi].pts&&dr.picks[pi].pts[keys[ki]])||0;
+      for(var pi=0;pi<dr.picks.length;pi++)for(var ki=0;ki<keys.length;ki++)s+=(dr.picks[pi].pts&&dr.picks[pi].pts[keys[ki]])||0;
       return s;
     });
     var prows='';
     for(var pi=0;pi<dr.picks.length;pi++){
-      var pk=dr.picks[pi], cells='';
-      for(var ri=0;ri<DK.length;ri++){
-        var v=0; for(var ki=0;ki<DK[ri].length;ki++) v+=(pk.pts&&pk.pts[DK[ri][ki]])||0;
-        cells+='<span class="scell'+(v>0?' has':'')+'">'+( v||'&mdash;')+'</span>';
-      }
+      var pk=dr.picks[pi],cells='';
+      for(var ri=0;ri<DK.length;ri++){var v=0;for(var ki=0;ki<DK[ri].length;ki++)v+=(pk.pts&&pk.pts[DK[ri][ki]])||0;cells+='<span class="scell'+(v>0?' has':'')+'">'+( v||'&mdash;')+'</span>';}
       cells+='<span class="scell tot">'+(pickPts(pk)||'&mdash;')+'</span>';
       prows+='<div class="srow'+(pk.eliminated?' elim':'')+'"><div class="srow-info">'+mkLogo(pk.team)+'<span class="srow-name">'+(pk.player||'&mdash;')+'</span></div>'+cells+'</div>';
     }
-    var tcells='', hdrs='';
-    for(var ri=0;ri<DL.length;ri++){hdrs+='<span>'+DL[ri]+'</span>';}
+    var tcells='',hdrs='';
+    for(var ri=0;ri<DL.length;ri++)hdrs+='<span>'+DL[ri]+'</span>';
     hdrs+='<span>Total</span>';
-    for(var ri=0;ri<rtots.length;ri++) tcells+='<span'+(rtots[ri]>0?' style="color:var(--orange)"':'')+'>'+(rtots[ri]||'&mdash;')+'</span>';
+    for(var ri=0;ri<rtots.length;ri++)tcells+='<span'+(rtots[ri]>0?' style="color:var(--orange)"':'')+'>'+(rtots[ri]||'&mdash;')+'</span>';
     tcells+='<span class="grand">'+(tot||'&mdash;')+'</span>';
-    html+='<div class="scoring-card">'
-      +'<div class="scoring-card-hdr"><span class="scoring-card-name">'+dr.name+'</span><span class="scoring-card-total">'+(tot||'&mdash;')+'</span></div>'
-      +'<div class="s-hdrs"><span>Player</span>'+hdrs+'</div>'
-      +prows
+    html+='<div class="scoring-card"><div class="scoring-card-hdr"><span class="scoring-card-name">'+dr.name+'</span><span class="scoring-card-total">'+(tot||'&mdash;')+'</span></div>'
+      +'<div class="s-hdrs"><span>Player</span>'+hdrs+'</div>'+prows
       +'<div class="s-totrow"><span>Team Total</span>'+tcells+'</div></div>';
   }
   wrap.innerHTML=html;
@@ -600,31 +558,39 @@ var SCHEDULE=[
     {time:'2:50 PM', net:'CBS',   t:[{seed:2,name:'Iowa State'},{seed:15,name:'Tennessee State'}]},
     {time:'3:15 PM', net:'truTV', t:[{seed:4,name:'Alabama'},{seed:13,name:'Hofstra'}]},
     {time:'4:10 PM', net:'TNT',   t:[{seed:8,name:'Villanova'},{seed:9,name:'Utah State'}]},
-    {time:'4:25 PM', net:'TBS',   t:[{seed:6,name:'Tennessee'},{seed:11,name:'TBD'}]},
+    {time:'4:25 PM', net:'TBS',   t:[{seed:6,name:'Tennessee'},{seed:11,name:'SMU'}]},
     {time:'6:50 PM', net:'TNT',   t:[{seed:8,name:'Clemson'},{seed:9,name:'Iowa'}]},
     {time:'7:10 PM', net:'CBS',   t:[{seed:5,name:"St. John's"},{seed:12,name:'Northern Iowa'}]},
     {time:'7:25 PM', net:'TBS',   t:[{seed:7,name:'UCLA'},{seed:10,name:'UCF'}]},
     {time:'7:35 PM', net:'truTV', t:[{seed:2,name:'Purdue'},{seed:15,name:'Queens'}]},
-    {time:'9:25 PM', net:'TNT',   t:[{seed:1,name:'Florida'},{seed:16,name:'TBD'}]},
+    {time:'9:25 PM', net:'TNT',   t:[{seed:1,name:'Florida'},{seed:16,name:'Norfolk State'}]},
     {time:'9:45 PM', net:'CBS',   t:[{seed:4,name:'Kansas'},{seed:13,name:'Cal Baptist'}]},
     {time:'10:00 PM',net:'TBS',   t:[{seed:2,name:'UConn'},{seed:15,name:'Furman'}]},
     {time:'10:10 PM',net:'truTV', t:[{seed:7,name:'Miami (Fla.)'},{seed:10,name:'Missouri'}]}
   ]}
 ];
-function renderGames() {
-  var wrap=document.getElementById('gamesWrap'); if(!wrap) return;
+function renderGames(){
+  var wrap=document.getElementById('gamesWrap');if(!wrap)return;
+  // Build team→picks lookup
   var tp={};
-  for(var di=0;di<draft.length;di++) for(var pi=0;pi<draft[di].picks.length;pi++){
-    var pk=draft[di].picks[pi]; if(!pk.team) continue;
-    var k=pk.team.toLowerCase(); if(!tp[k]) tp[k]=[];
+  for(var di=0;di<draft.length;di++)for(var pi=0;pi<draft[di].picks.length;pi++){
+    var pk=draft[di].picks[pi];if(!pk.team)continue;
+    var k=pk.team.toLowerCase();if(!tp[k])tp[k]=[];
     tp[k].push({owner:draft[di].name,player:pk.player});
   }
+  // Build live game map — index multiple ways for fuzzy matching
   var lm={};
-  if(bracketData) for(var gi=0;gi<bracketData.length;gi++){
-    var g=bracketData[gi], comp=g.competitions&&g.competitions[0], tms=comp?comp.competitors:[];
-    if(!tms||tms.length<2) continue;
-    var k=tms.map(function(t){return(t.team&&t.team.displayName?t.team.displayName:'').toLowerCase();}).sort().join('|');
-    lm[k]=g;
+  if(bracketData)for(var gi=0;gi<bracketData.length;gi++){
+    var g=bracketData[gi],comp=g.competitions&&g.competitions[0],tms=comp?comp.competitors:[];
+    if(!tms||tms.length<2)continue;
+    var dns=tms.map(function(t){return(t.team&&t.team.displayName?t.team.displayName:'').toLowerCase();});
+    var sns=tms.map(function(t){return(t.team&&t.team.shortDisplayName?t.team.shortDisplayName:'').toLowerCase();});
+    lm[dns.slice().sort().join('|')]=g;
+    lm[sns.slice().sort().join('|')]=g;
+    for(var ti2=0;ti2<tms.length;ti2++){
+      var dn2=(tms[ti2].team&&tms[ti2].team.displayName?tms[ti2].team.displayName:'').toLowerCase();
+      if(dn2)lm['_t_'+dn2]=g;
+    }
   }
   var html='';
   for(var di=0;di<SCHEDULE.length;di++){
@@ -633,25 +599,31 @@ function renderGames() {
     for(var gi=0;gi<day.games.length;gi++){
       var gm=day.games[gi];
       var lk=gm.t.map(function(t){return t.name.toLowerCase();}).sort().join('|');
-      var lg=lm[lk], isLive=lg&&lg.status&&lg.status.type&&lg.status.type.state==='in';
+      var lg=lm[lk];
+      // Fallback: match by individual team name
+      if(!lg){for(var fbi=0;fbi<gm.t.length;fbi++){var fbk='_t_'+gm.t[fbi].name.toLowerCase();if(lm[fbk]){lg=lm[fbk];break;}}}
+      var isLive=lg&&lg.status&&lg.status.type&&lg.status.type.state==='in';
       var isDone=lg&&lg.status&&lg.status.type&&lg.status.type.completed;
       var lgt=(lg&&lg.competitions&&lg.competitions[0]&&lg.competitions[0].competitors)||[];
       var tl=gm.time;
       if(isLive){var clk=(lg.status&&lg.status.displayClock)||'',per=(lg.status&&lg.status.period)||'';tl='LIVE \u00B7 '+clk+(per?' P'+per:'');}
-      else if(isDone) tl='Final';
+      else if(isDone)tl='Final';
       var trows='';
       for(var ti=0;ti<gm.t.length;ti++){
-        var tm=gm.t[ti], lt=null;
-        for(var lti=0;lti<lgt.length;lti++){var dn=(lgt[lti].team&&lgt[lti].team.displayName?lgt[lti].team.displayName:'').toLowerCase();if(dn.indexOf(tm.name.toLowerCase())!==-1||tm.name.toLowerCase().indexOf(dn)!==-1){lt=lgt[lti];break;}}
-        var score=(isLive||isDone)?(lt&&lt.score||''):'';
-        var won=isDone&&lt&&lt.winner===true, lost=isDone&&lt&&lt.winner===false;
-        var lurl=(lt&&lt.team&&lt.team.logos&&lt.team.logos[0])?lt.team.logos[0].href:null;
+        var tm=gm.t[ti],lt=null;
+        for(var lti=0;lti<lgt.length;lti++){
+          var dn=(lgt[lti].team&&lgt[lti].team.displayName?lgt[lti].team.displayName:'').toLowerCase();
+          var sn=(lgt[lti].team&&lgt[lti].team.shortDisplayName?lgt[lti].team.shortDisplayName:'').toLowerCase();
+          if(dn.indexOf(tm.name.toLowerCase())!==-1||tm.name.toLowerCase().indexOf(dn)!==-1||sn===tm.name.toLowerCase()){lt=lgt[lti];break;}
+        }
+        var score=(isLive||isDone)?(lt&&lt.score!=null?lt.score:''):'';
+        var won=isDone&&lt&&lt.winner===true,lost=isDone&&lt&&lt.winner===false;
         var cls=won?'winner':lost?'loser':isLive?'livescore':'';
         trows+='<div class="game-team '+cls+'"><span class="game-seed">'+tm.seed+'</span>'+mkLogo(tm.name,'game-tlogofb',24)+'<span class="game-tname">'+tm.name+'</span><span class="game-score">'+score+'</span></div>';
-        if(ti===0) trows+='<div class="game-div"></div>';
+        if(ti===0)trows+='<div class="game-div"></div>';
       }
       var dp='';
-      for(var ti=0;ti<gm.t.length;ti++){var pks=tp[gm.t[ti].name.toLowerCase()]||[];for(var pi=0;pi<pks.length;pi++) dp+='<div class="chip"><span class="chip-own">'+pks[pi].owner+'</span><span class="chip-nm">&middot; '+pks[pi].player+'</span></div>';}
+      for(var ti=0;ti<gm.t.length;ti++){var pks=tp[gm.t[ti].name.toLowerCase()]||[];for(var pi=0;pi<pks.length;pi++)dp+='<div class="chip"><span class="chip-own">'+pks[pi].owner+'</span><span class="chip-nm">&middot; '+pks[pi].player+'</span></div>';}
       html+='<div class="game-row'+(isLive?' live':isDone?' done':'')+'"><div class="game-top"><span class="game-time">'+(isLive?'\uD83D\uDD34 ':'')+tl+'</span><span class="game-net">'+gm.net+'</span></div>'
         +'<div class="game-teams">'+trows+'</div>'+(dp?'<div class="game-players">'+dp+'</div>':'')+'</div>';
     }
@@ -660,11 +632,11 @@ function renderGames() {
   wrap.innerHTML=html;
 }
 // ── EDIT ─────────────────────────────────────────────────────
-function buildEdit() {
+function buildEdit(){
   _d=draft.map(function(dr){return{name:dr.name,picks:dr.picks.map(function(p){return{player:p.player,team:p.team,pts:p.pts,eliminated:p.eliminated};})};});
   var html='';
   for(var di=0;di<_d.length;di++){
-    var dr=_d[di], rows='';
+    var dr=_d[di],rows='';
     for(var pi=0;pi<dr.picks.length;pi++){
       var pk=dr.picks[pi];
       rows+='<div class="pick-row"><span class="pick-n">'+(pi+1)+'</span>'
@@ -679,30 +651,23 @@ function buildEdit() {
 }
 window.saveDraft=function(){
   draft=_d.map(function(dr){return{name:dr.name,picks:dr.picks.map(function(p){return{player:p.player||'',team:p.team||'',pts:p.pts||{},eliminated:p.eliminated||false};})};});
-  saveLocal(); showToast('\u2713 Saved'); renderAll(); refresh();
+  saveLocal();showToast('\u2713 Saved');renderAll();refresh();
 };
-window.clearDraft=function(){
-  if(!confirm('Clear all picks?')) return;
-  draft=defDraft(); saveLocal(); buildEdit(); renderAll();
-};
+window.clearDraft=function(){if(!confirm('Clear all picks?'))return;draft=defDraft();saveLocal();buildEdit();renderAll();};
 // ── OVERRIDE ─────────────────────────────────────────────────
-var OV_LABELS=['Round of 64','Round of 32','Sweet 16','Elite 8','Final Four','Championship'];
-function buildOverride() {
+var OVL=['Round of 64','Round of 32','Sweet 16','Elite 8','Final Four','Championship'];
+function buildOverride(){
   var bhtml='';
-  for(var i=0;i<RK.length;i++){
-    var rk=RK[i];
-    bhtml+='<button class="ov-rnd'+(rk===ovRound?' on':'')+'" onclick="setOvRound(\''+rk+'\')">'+OV_LABELS[i]+'</button>';
-  }
+  for(var i=0;i<RK.length;i++){var rk=RK[i];bhtml+='<button class="ov-rnd'+(rk===ovRound?' on':'')+'" onclick="setOvRound(\''+rk+'\')">'+OVL[i]+'</button>';}
   document.getElementById('ovRounds').innerHTML=bhtml;
   var html='';
   for(var di=0;di<draft.length;di++){
-    var dr=draft[di]; if(!dr.name) continue;
+    var dr=draft[di];if(!dr.name)continue;
     var rows='';
     for(var pi=0;pi<dr.picks.length;pi++){
-      var pk=dr.picks[pi]; if(!pk.player) continue;
+      var pk=dr.picks[pi];if(!pk.player)continue;
       var cur=(pk.pts&&pk.pts[ovRound])||0;
-      rows+='<div class="ov-row">'+mkLogo(pk.team)
-        +'<span class="ov-pname">'+pk.player+'</span>'
+      rows+='<div class="ov-row">'+mkLogo(pk.team)+'<span class="ov-pname">'+pk.player+'</span>'
         +'<input class="ov-inp" type="number" min="0" max="60" value="'+cur+'" id="ov_'+di+'_'+pi+'"/>'
         +'<label class="ov-elim"><input type="checkbox" id="el_'+di+'_'+pi+'"'+(pk.eliminated?' checked':'')+'/><span>Out</span></label></div>';
     }
@@ -710,28 +675,28 @@ function buildOverride() {
   }
   document.getElementById('ovCards').innerHTML=html;
 }
-window.setOvRound=function(rk){ ovRound=rk; buildOverride(); };
+window.setOvRound=function(rk){ovRound=rk;buildOverride();};
 window.saveOverride=function(){
   for(var di=0;di<draft.length;di++){
     for(var pi=0;pi<draft[di].picks.length;pi++){
-      var pk=draft[di].picks[pi]; if(!pk.player) continue;
+      var pk=draft[di].picks[pi];if(!pk.player)continue;
       var inp=document.getElementById('ov_'+di+'_'+pi);
       var eli=document.getElementById('el_'+di+'_'+pi);
       if(inp){var v=parseInt(inp.value,10);if(!isNaN(v)&&v>=0){if(!pk.pts)pk.pts={};pk.pts[ovRound]=v;}}
-      if(eli) pk.eliminated=eli.checked;
+      if(eli)pk.eliminated=eli.checked;
     }
   }
-  saveLocal(); renderAll(); showToast('\u2713 Points saved');
+  saveLocal();renderAll();showToast('\u2713 Points saved');
 };
 // ── NAV ──────────────────────────────────────────────────────
 window.goTab=function(name,btn){
-  var vs=document.querySelectorAll('.view'); for(var i=0;i<vs.length;i++) vs[i].classList.remove('on');
-  var bs=document.querySelectorAll('.bni'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('on');
-  document.getElementById('v-'+name).classList.add('on'); btn.classList.add('on');
+  var vs=document.querySelectorAll('.view');for(var i=0;i<vs.length;i++)vs[i].classList.remove('on');
+  var bs=document.querySelectorAll('.bni');for(var i=0;i<bs.length;i++)bs[i].classList.remove('on');
+  document.getElementById('v-'+name).classList.add('on');btn.classList.add('on');
   if(name==='lb'){renderHero();renderBoard();}
-  else if(name==='teams') renderTeams();
-  else if(name==='scoring') renderScoring();
-  else if(name==='games') renderGames();
+  else if(name==='teams')renderTeams();
+  else if(name==='scoring')renderScoring();
+  else if(name==='games')renderGames();
   else if(name==='edit'){buildEdit();buildOverride();}
   window.scrollTo({top:0,behavior:'instant'});
 };
