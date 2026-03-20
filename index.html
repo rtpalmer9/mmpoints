@@ -315,7 +315,7 @@ function defDraft(){
     {name:'Trevor', picks:[p('Cameron Boozer','Duke'),p('Graham Ike','Gonzaga'),p('Alex Condon','Florida'),p('Christian Anderson','Texas Tech'),p('Cruz Davis','Hofstra'),p('Xaivian Lee','Florida')]},
     {name:'Pete',   picks:[p('Brayden Burries','Arizona'),p('Jaden Bradley','Arizona'),p('Emanuel Sharp','Houston'),p('Milos Uzan','Houston'),p('Motiejus Krivas','Arizona'),p('Amani Lyles','Akron')]},
     {name:'Baur',   picks:[p('Yaxel Lendeborg','Michigan'),p('Keaton Wagler','Illinois'),p('Tyler Tanner','Vanderbilt'),p('Labaron Philon','Alabama'),p('Tavari Johnson','Akron'),p('John Blackwell','Wisconsin')]},
-    {name:'Chris',  picks:[p('Darius Acuff Jr.','Arkansas'),p('AJ Dybantsa','BYU'),p('Meleek Thomas','Arkansas'),p('Milan Momcilovic','Iowa State'),p('Darryn Peterson','Kansas'),p('Terry Anderson','Cal Baptist')]},
+    {name:'Chris',  picks:[p('Darius Acuff Jr.','Arkansas'),p('AJ Dybantsa','BYU'),p('Meleek Thomas','Arkansas'),p('Milan Momcilovic','Iowa State'),p('Darryn Peterson','Kansas'),p('Terry Anderson','High Point')]},
     {name:'Ryan',   picks:[p('Kingston Flemings','Houston'),p('Morez Johnson Jr.','Michigan'),p('Trey Kaufman-Renn','Purdue'),p('Jeremy Fears Jr.','Michigan State'),p('Aday Mara','Michigan'),p('Dominique Daniels Jr.','Cal Baptist')]},
     {name:'Palmer', picks:[p('Thomas Haugh','Florida'),p('Isaiah Evans','Duke'),p('Joshua Jefferson','Iowa State'),p('Koa Peat','Arizona'),p('Tamin Lipsey','Iowa State'),p('Trey Campbell','Northern Iowa')]}
   ];
@@ -415,7 +415,11 @@ async function refresh(){
         if(!pk.player)continue;
         var key=normName(pk.player);
         var np=pts[key]||{};
-        var ne=elim[pk.team.toLowerCase()]===true;
+        // Fuzzy elim: ESPN may return "Wisconsin Badgers" but pick stores "Wisconsin"
+        var teamLower=pk.team.toLowerCase();
+        var ne=false;
+        if(elim[teamLower]){ne=true;}
+        else{var ek=Object.keys(elim);for(var ei=0;ei<ek.length;ei++){if(ek[ei].indexOf(teamLower)!==-1||teamLower.indexOf(ek[ei])!==-1){ne=true;break;}}}
         var espnHasData=Object.keys(np).length>0;
         if(espnHasData&&JSON.stringify(pk.pts)!==JSON.stringify(np)){pk.pts=np;changed=true;}
         if(pk.eliminated!==ne){pk.eliminated=ne;changed=true;}
